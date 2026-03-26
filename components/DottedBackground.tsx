@@ -88,17 +88,23 @@ export default function DottedBackground(): JSX.Element {
       if (!context) return;
       const w = window.innerWidth;
       const h = window.innerHeight;
-      timeRef.current += 0.016;
+      timeRef.current += 0.08;
 
-      context.fillStyle = "#ffffff";
-      context.fillRect(0, 0, w, h);
+      context.clearRect(0, 0, w, h);
 
       context.fillStyle = DOT_COLOR;
       const t = timeRef.current * MOVE_SPEED;
 
       for (const dot of dotsRef.current) {
-        const x = dot.x + Math.sin(dot.phaseX + t) * 3;
-        const y = dot.y + Math.cos(dot.phaseY + t * 0.7) * 3;
+        const x =
+          dot.x +
+          Math.sin(dot.phaseX + t) * 6 +
+          Math.sin((dot.y + t * 40) * 0.01) * 4;
+
+        const y =
+          dot.y +
+          Math.cos(dot.phaseY + t * 0.7) * 6 +
+          Math.cos((dot.x + t * 40) * 0.01) * 4;
         drawDot(context, x, y, DOT_RADIUS);
       }
 
@@ -123,6 +129,7 @@ export default function DottedBackground(): JSX.Element {
         height: "100%",
         display: "block",
         pointerEvents: "none",
+        zIndex:0,
       }}
     />
   );

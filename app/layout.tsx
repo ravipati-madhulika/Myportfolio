@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Press_Start_2P } from "next/font/google";
 import "./globals.css";
+import CustomCursor from "@/components/Cursor";
 
 const pressStart2P = Press_Start_2P({
   weight: "400",
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={pressStart2P.variable}>
       <body style={{ fontFamily: "var(--font-pixel), monospace" }}>
+        <CustomCursor/>
         {children}
       </body>
     </html>

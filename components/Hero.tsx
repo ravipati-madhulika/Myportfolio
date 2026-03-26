@@ -1,33 +1,65 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
 export default function Hero(): JSX.Element {
+  const finalText = "RAVIPATI MADHULIKA";
+  const [display, setDisplay] = useState(Array(finalText.length).fill(""));
+  const [done, setDone] = useState(false);
+  useEffect(() => {
+    const intervals: NodeJS.Timeout[] = [];
+
+    finalText.split("").forEach((char, index) => {
+      if (char === " ") {
+        setDisplay((prev) => {
+          const newArr = [...prev];
+          newArr[index] = " ";
+          return newArr;
+        });
+        return;
+      }
+
+      let count = 0;
+
+      const interval = setInterval(() => {
+        count++;
+
+        setDisplay((prev) => {
+          const newArr = [...prev];
+
+          if (count > 10) {
+            newArr[index] = char;
+            clearInterval(interval);
+            // check if all letters are done
+          if (index === finalText.length - 1) {
+              setDone(true);
+            }
+          } else {
+            newArr[index] =
+              letters[Math.floor(Math.random() * letters.length)];
+          }
+
+          return newArr;
+        });
+      }, 70);
+
+      intervals.push(interval);
+    });
+
+    return () => intervals.forEach(clearInterval);
+  }, []);
+
   return (
     <section className="hero">
-      <div className="hero-inner">
-        <div className="kicker">Full Stack • Mobile • UI/UX</div>
-        <h1 className="hero-title">RAVIPATI MADHULIKA</h1>
-        <p className="hero-subtitle">
-          I build end-to-end products: sleek interfaces, thoughtful experiences, and reliable
-          systems—from React/Next.js web apps to React Native mobile.
-        </p>
-
-        <div className="hero-roles" aria-label="Roles">
-          <span className="chip">Full Stack Developer</span>
-          <span className="chip">Mobile Developer</span>
-          <span className="chip">UI/UX Designer</span>
-        </div>
-
-        <div className="hero-links" aria-label="Quick links">
-          <a className="btn btn-primary" href="#projects">
-            View Projects
-          </a>
-          <a className="btn" href="#contact">
-            Contact
-          </a>
-          <a className="btn" href="#skills">
-            Skills
-          </a>
-        </div>
+      <div className="hero-left">
+      <h1 className={`hero-title ${done ? "active" : ""}`}>
+        {display.join("")}
+      </h1>
+      </div>
+      <div className="hero-right">
+        <img src="/hero.png" alt="hero" />
       </div>
     </section>
   );
