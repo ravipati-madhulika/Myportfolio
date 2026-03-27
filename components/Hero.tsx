@@ -2,62 +2,67 @@
 
 import { useEffect, useState } from "react";
 
-const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 export default function Hero(): JSX.Element {
-  const finalText = "RAVIPATI MADHULIKA";
-  const [display, setDisplay] = useState(Array(finalText.length).fill(""));
-  const [done, setDone] = useState(false);
+  const roles = ["DESIGNER", "DEVELOPER"];
+
+  const [index, setIndex] = useState(0);
+  const [displayText, setDisplayText] = useState(roles[0]);
+
   useEffect(() => {
-    const intervals: NodeJS.Timeout[] = [];
+    let timeout: NodeJS.Timeout;
 
-    finalText.split("").forEach((char, index) => {
-      if (char === " ") {
-        setDisplay((prev) => {
-          const newArr = [...prev];
-          newArr[index] = " ";
-          return newArr;
-        });
-        return;
-      }
+    const morphText = (from: string, to: string) => {
+      let step = 0;
 
-      let count = 0;
+      const max = Math.max(from.length, to.length);
 
       const interval = setInterval(() => {
-        count++;
+        step++;
 
-        setDisplay((prev) => {
-          const newArr = [...prev];
+        const progress = step / max;
 
-          if (count > 10) {
-            newArr[index] = char;
-            clearInterval(interval);
-            // check if all letters are done
-          if (index === finalText.length - 1) {
-              setDone(true);
-            }
-          } else {
-            newArr[index] =
-              letters[Math.floor(Math.random() * letters.length)];
-          }
+        const newText = to
+          .split("")
+          .map((char, i) => {
+            if (i < progress * max) return char;
+            return from[i] || "";
+          })
+          .join("");
 
-          return newArr;
-        });
-      }, 70);
+        setDisplayText(newText);
 
-      intervals.push(interval);
-    });
+        if (step >= max) {
+          clearInterval(interval);
 
-    return () => intervals.forEach(clearInterval);
-  }, []);
+          timeout = setTimeout(() => {
+            setIndex((prev) => (prev + 1) % roles.length);
+          }, 1500);
+        }
+      }, 80);
+    };
+
+    morphText(roles[index], roles[(index + 1) % roles.length]);
+
+    return () => clearTimeout(timeout);
+  }, [index]);
 
   return (
     <section className="hero">
       <div className="hero-left">
-      <h1 className={`hero-title ${done ? "active" : ""}`}>
-        {display.join("")}
-      </h1>
+        <p className="hero-tag">MOBILE</p>
+  
+        <h1 className="hero-main">
+          <span className="uiux">UI/UX</span>
+          <span className="role">{displayText}</span>
+        </h1>
+  
+        <p className="hero-sub">
+          Design Engineer & Full Stack Developer.
+        </p>
       </div>
+  
+      {/* 👇 ADD THIS BACK */}
       <div className="hero-right">
         <img src="/hero.png" alt="hero" />
       </div>
