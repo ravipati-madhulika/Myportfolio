@@ -6,11 +6,13 @@ import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import DottedBackground from "@/components/DottedBackground";
 
 export default function Home(): JSX.Element {
   return (
     <main style={{ position: "relative" }}>
       <section id="hero"><Hero /></section>
+      <DottedBackground />
       <Navbar/>
       <section id="about"><About /></section>
       <section id="study"><Study /></section>

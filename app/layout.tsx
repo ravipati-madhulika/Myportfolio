@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Press_Start_2P } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/Cursor";
-import DottedBackground from "@/components/DottedBackground";
 import GamePopup from "@/components/Game";
 
 const pressStart2P = Press_Start_2P({
@@ -28,7 +27,6 @@ export default function RootLayout({
     <html lang="en" className={pressStart2P.variable}>
       <body>
         <CustomCursor/>
-        <DottedBackground/>
         <GamePopup/>
         {children}
       </body>
