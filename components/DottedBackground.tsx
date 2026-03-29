@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef } from "react";
 
 const DOT_RADIUS = 1;
 const DOT_COLOR = "#000000";
-const MOVE_SPEED = 0.15;
+const MOVE_SPEED = 0.4;
 const SPACING = 28;
 
 interface Dot {
