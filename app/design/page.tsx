@@ -40,7 +40,7 @@ export default function DesignPage() {
         <p className="sidebar-heading">UI/UX Design Work</p>
 
         <div className="sidebar-bottom">
-          <p>Contact</p>
+          <p>← Back</p>
         </div>
       </aside>
 
