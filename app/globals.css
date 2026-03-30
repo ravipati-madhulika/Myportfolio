@@ -1316,22 +1316,6 @@ a.design-card {
 /* ========================= */
 /* ===== RESPONSIVE ===== */
 /* ========================= */
-
-@media (max-width: 768px) {
-  .design-layout {
-    flex-direction: column;
-  }
-
-  .design-sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-
-  .design-grid {
-    grid-template-columns: 1fr;
-  }
-}
 /* ===== LAYOUT ===== */
 .design-layout {
   display: flex;
@@ -1437,26 +1421,6 @@ a.design-card {
   object-fit: contain; /* 👈 NO cropping */
 }
 
-/* ===== MOBILE ===== */
-@media (max-width: 768px) {
-  .design-layout {
-    flex-direction: column;
-  }
-
-  .design-sidebar {
-    position: relative;
-    width: 100%;
-    height: auto;
-  }
-
-  .project-content {
-    padding: 30px 20px;
-  }
-
-  .project-title {
-    font-size: 32px;
-  }
-}
 /* ===== TOP RIGHT BUTTON ===== */
 .project-topbar {
   position: relative;
@@ -2049,4 +2013,29 @@ section + section::before {
 }
 body:not(.game-open) * {
   cursor: none !important;
+}
+@media (max-width: 768px) {
+
+  .design-layout {
+    flex-direction: column;
+  }
+
+  .design-sidebar {
+    position: relative !important;  /* 🔥 FORCE override */
+    width: 100%;
+    height: auto;
+  }
+
+  .design-content {
+    margin-left: 0 !important;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .project-content {
+    margin-left: 0 !important;   /* 🔥 THIS FIXES YOUR ISSUE */
+    width: 100%;
+    padding: 20px;
+  }
+
 }
