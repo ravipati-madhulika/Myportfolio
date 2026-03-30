@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     icon: "/icon.ico",
   },
 };
+//k
 export default function RootLayout({
   children,
 }: Readonly<{
