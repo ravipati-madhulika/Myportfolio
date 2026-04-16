@@ -137,7 +137,7 @@ export default function Hero(): JSX.Element {
         </p>
         <div className="resume-btn">
         <a href="/Ravipati_Madhulika.pdf" download>
-          <span>RESUME</span>
+          <span>RESUME ⬇</span>
 
           {/* eyes */}
           <div className="eyes">
